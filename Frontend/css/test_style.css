@@ -1,0 +1,81 @@
+body {
+  background: grey;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.testPage {
+  width: 1920px;
+  height: 1080px;
+  display: flex;
+}
+
+.rightpart {
+  width: 960px;
+  height: 1080px;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addNew{
+  width: 960px;
+  height: 50px;
+}
+
+.test-box {
+  height: 960px;
+  border: 1px solid #F1F3F4;
+  overflow: hidden;
+  margin: 0px;
+  position: relative;
+}
+
+#addNew_Btn{
+  margin-top: 70px;
+  width: 960px;
+  height: 50px;
+}
+
+.test-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.rightpart {
+  width: 960px;
+  height: 1080px;
+}
+
+.answer{
+  width: 960px;
+  height: 910px;
+  border: 1px solid black;
+}
+#confidence {
+  width: 960px;
+  height: 120px;
+  border: 1px solid black;
+  visibility: hidden;
+}
+
+.submit {
+  width: 960px;
+  height: 50px;
+}
+
+#submit_Btn {
+  width: 960px;
+  height: 50px;
+}
+
+#confidence_Btn {
+  margin-left: 430px;
+  width: 100px;
+  height: 50px;
+}
+
+.slider {
+  margin-left: 330px;
+  width: 300px;
+}
