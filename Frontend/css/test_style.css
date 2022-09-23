@@ -1,21 +1,22 @@
 body {
   background: grey;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+#back{
+  width: 150px;
+  height: 50px;
 }
 
 .testPage {
   width: 1920px;
   height: 1080px;
   display: flex;
+  border: 1px solid black;
 }
 
-.rightpart {
-  width: 960px;
-  height: 1080px;
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .addNew{
   width: 960px;
@@ -30,8 +31,24 @@ body {
   position: relative;
 }
 
+#move_Btn{
+  width: 300px;
+  height: 50px;
+}
+
+#zoom_In{
+  margin-left: 25px;
+  width: 300px;
+  height: 50px;
+  
+}
+
+#zoom_Out{
+  width: 300px;
+  height: 50px;
+}
+
 #addNew_Btn{
-  margin-top: 70px;
   width: 960px;
   height: 50px;
 }
@@ -40,22 +57,17 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.rightpart {
-  width: 960px;
-  height: 1080px;
+  width: 1500;
 }
 
 .answer{
   width: 960px;
-  height: 910px;
-  border: 1px solid black;
+  height: 892px;
 }
+
 #confidence {
   width: 960px;
   height: 120px;
-  border: 1px solid black;
   visibility: hidden;
 }
 
@@ -78,4 +90,30 @@ body {
 .slider {
   margin-left: 330px;
   width: 300px;
+  display: inline-block;
+}
+
+#conf_value{
+  display: inline-block;
+}
+
+#div_ans{
+  width: 960px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+#div_text{
+  width: 800px;
+  height: 40px;
+  background-color: white;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+#div_btn{
+  width: 60px;
+  height: 40px;
+  margin-top: 10px;
+  float: right;
 }
