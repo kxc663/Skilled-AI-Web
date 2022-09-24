@@ -14,7 +14,7 @@
   <div class="testPage">
     <div class="leftpart">
       <div class="test-box" id="imgBox" onmousedown="selectAnswer(event)">
-        <img id="pic1" class="test-img" src="./img/broken_cylinder_1.png" alt="" width="960px" />
+        <img id="pic1" class="test-img" src="img/broken_cylinder_1.png" alt="" width="960px" />
         <canvas id="myCanvas" width="960" height="960"></canvas>
       </div>
       <div class="Zoom">
@@ -28,7 +28,11 @@
       </div>
     </div>
     <div class="rightpart">
-      <div class="answer" id="answerDiv"> Answer:</div>
+      <div class="answer" id="answerDiv">Answer:
+        <div id="answerArea">
+
+        </div>
+      </div>
       <div id="confidence"> Confidence:
         <div class="slidecontainer">
           <input type="range" class="slider" id="conf_slider" min="0" max="100" step="10" onchange="sliderChange()" />
@@ -37,7 +41,7 @@
         </div>
       </div>
       <div class="submit">
-        <button id="submit_Btn">submit</button>
+        <button id="submit_Btn" onclick="submit()">submit</button>
       </div>
     </div>
   </div>
@@ -96,6 +100,10 @@
     }
     imageZoom.init();
   */
+  //***********************************generate random img*********************************************************************
+    
+  //***************************************************************************************************************************
+
   //***********************************image drag******************************************************************************
   var canDrag = false;
   var imageDrag = function () {
@@ -252,8 +260,8 @@
     newAnswerLine.setAttribute("id", "div_ans");
     newTextArea.setAttribute("id", "div_text");
     newBtn.setAttribute("class", "div_btn");
-    newBtn.setAttribute("id", i.toString());
-    document.getElementById("answerDiv").appendChild(newAnswerLine);
+    newBtn.setAttribute("id", index.toString());
+    document.getElementById("answerArea").appendChild(newAnswerLine);
     newAnswerLine.appendChild(newTextArea);
     newTextArea.innerHTML += "position x: " + ansX + " " + "position y: " + ansY + " " + "confidence: " + conf + "%";
     newAnswerLine.appendChild(newBtn);
@@ -305,7 +313,19 @@
     var ctx = cnvs.getContext("2d");
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);  
   }
+  
+  //**************************************interaction button*******************************************************************
   function back(){
-    
+    location.href = "login.html";
   }
-</Script>
+
+  function submit(){
+    //change picture here
+    document.getElementById("pic1").src = "img/broken_cylinder_2.png";
+    clearCanvas();
+    document.getElementById("answerArea").innerHTML = "";
+    //need to push the data to database here
+    testerMap.clear();
+  }
+  //***************************************************************************************************************************
+</Script> 
