@@ -111,7 +111,7 @@ body {
   display: inline-block;
 }
 
-#div_btn{
+.div_btn{
   width: 60px;
   height: 40px;
   margin-top: 10px;

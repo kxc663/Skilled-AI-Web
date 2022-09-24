@@ -236,30 +236,76 @@
   //***********************************answer zone*****************************************************************************
   var ansX;
   var ansY;
-  
+  var index = 0;
+  var testerMap = new Map(); //(order, x, y, conf, del?)
+  // change this line to change tester (still working on it)
+  //var jsonStr = '{"Tester1":[{"AnswerOrd": 0, "X": 0, "Y": 0, "CONF": 0, "DEL": "TRUE"}]}';
   function confirmAns() {
+    index++;
+    //*********create answer field********************************
     document.getElementById("addNew_Btn").disabled = false;
     document.getElementById("confidence").style.visibility = "hidden";
     document.getElementById("move_Btn").disabled = false;
     const newAnswerLine = document.createElement("div");
     const newTextArea = document.createElement("div");
     const newBtn = document.createElement("button");
-    console.log("add");
     newAnswerLine.setAttribute("id", "div_ans");
     newTextArea.setAttribute("id", "div_text");
-    newBtn.setAttribute("id", "div_btn");
+    newBtn.setAttribute("class", "div_btn");
+    newBtn.setAttribute("id", i.toString());
     document.getElementById("answerDiv").appendChild(newAnswerLine);
     newAnswerLine.appendChild(newTextArea);
     newTextArea.innerHTML += "position x: " + ansX + " " + "position y: " + ansY + " " + "confidence: " + conf + "%";
     newAnswerLine.appendChild(newBtn);
+    //************************************************************
+
+    //put answer into the map
+    pushValue(testerMap, index, ansX, ansY, conf, "FALSE");
+    console.log(testerMap);
+    
+    //*************delete answers*********************************
     newBtn.innerHTML = "Delete";
     newBtn.onclick = function () {
+      var ord = this.id + "";
+      var x = testerMap.get(ord)[0];
+      var y = testerMap.get(ord)[1];
+      var confident = testerMap.get(ord)[2];
+      var change = testerMap.get(ord)[3];
+      if (change=="FALSE"){
+        pushValue(testerMap, this.id, x, y, confident, "TRUE");
+      }
+      console.log(testerMap);
+      clearCanvas();
+      for (var k = 1; k <= testerMap.size; k++){
+        var order = k+"";
+        var change1 = testerMap.get(order)[3];
+        if(change1=="FALSE"){
+          var x1 = testerMap.get(order)[0];
+          var y1 = testerMap.get(order)[1];
+          Draw(x1, y1);
+        }
+      }
       newAnswerLine.remove();
+      //*********************************************************
     };
   }
   //***************************************************************************************************************************
+  
+  function pushValue(map, ord, x, y, confident, change){
+    var order = ord + "";
+    map.set(order, []);
+    testerMap.get(order).push(x);
+    testerMap.get(order).push(y);
+    testerMap.get(order).push(confident);
+    testerMap.get(order).push(change);
+  }
 
+  function clearCanvas(){
+    var cnvs = document.getElementById("myCanvas");
+    var ctx = cnvs.getContext("2d");
+    ctx.clearRect(0, 0, cnvs.width, cnvs.height);  
+  }
   function back(){
-
+    
   }
 </Script>
