@@ -33,11 +33,17 @@
 
         </div>
       </div>
-      <div id="confidence"> Confidence:
+      <div id="confidence_type"> Confidence & Abnormal Type:
         <div class="slidecontainer">
           <input type="range" class="slider" id="conf_slider" min="0" max="100" step="10" onchange="sliderChange()" />
           <div id="conf_value"> 50% </div>
-          <button id="confidence_Btn" onclick="confirmAns()">Confirm</button>
+          <select id="types">
+            <option value = "Broken Cylinder">Broken Cylinder</option>
+            <option value = "Ellipse">Ellipse</option>
+            <option value = "Elongated Cone">Elongated Cone</option>
+            <option value = "Rotated Square">Rotated Square</option>
+          </select>
+          <button id="confirm_Btn" onclick="confirmAns()">Confirm</button>
         </div>
       </div>
       <div class="submit">
@@ -232,7 +238,7 @@
     ctx.lineWidth = 3;
     ctx.strokeStyle = "red";
     ctx.stroke();
-    document.getElementById("confidence").style.visibility = "visible";
+    document.getElementById("confidence_type").style.visibility = "visible";
     canDraw = false;
   }
   //***************************************************************************************************************************
@@ -250,37 +256,52 @@
   //var jsonStr = '{"Tester1":[{"AnswerOrd": 0, "X": 0, "Y": 0, "CONF": 0, "DEL": "TRUE"}]}';
   function confirmAns() {
     index++;
+    var abnormalType;
+    abnormalType = document.getElementById("types").value;
     //*********create answer field********************************
     document.getElementById("addNew_Btn").disabled = false;
-    document.getElementById("confidence").style.visibility = "hidden";
+    document.getElementById("confidence_type").style.visibility = "hidden";
     document.getElementById("move_Btn").disabled = false;
     const newAnswerLine = document.createElement("div");
     const newTextArea = document.createElement("div");
-    const newBtn = document.createElement("button");
+    const newChangeBtn = document.createElement("button");
+    const newDeleteBtn = document.createElement("button");
     newAnswerLine.setAttribute("id", "div_ans");
     newTextArea.setAttribute("id", "div_text");
-    newBtn.setAttribute("class", "div_btn");
-    newBtn.setAttribute("id", index.toString());
+    newChangeBtn.setAttribute("class", "change_btn");
+    newChangeBtn.setAttribute("id", index.toString());
+    newDeleteBtn.setAttribute("class", "del_Btn");
+    newDeleteBtn.setAttribute("id", index.toString());
     document.getElementById("answerArea").appendChild(newAnswerLine);
     newAnswerLine.appendChild(newTextArea);
-    newTextArea.innerHTML += "position x: " + ansX + " " + "position y: " + ansY + " " + "confidence: " + conf + "%";
-    newAnswerLine.appendChild(newBtn);
+    newTextArea.innerHTML += "Position x: " + ansX + "&nbsp;&nbsp;&nbsp;" 
+    + "Position y: " + ansY + "&nbsp;&nbsp;&nbsp;" 
+    + "Confidence: " + conf + "%" + "&nbsp;&nbsp;&nbsp;" 
+    + "Abnormal Type: " + abnormalType;
+    newAnswerLine.appendChild(newDeleteBtn);
+    newAnswerLine.appendChild(newChangeBtn);
+  
     //************************************************************
 
     //put answer into the map
-    pushValue(testerMap, index, ansX, ansY, conf, "FALSE");
+    pushValue(testerMap, index, ansX, ansY, conf, abnormalType, "FALSE", 0);
     console.log(testerMap);
     
     //*************delete answers*********************************
-    newBtn.innerHTML = "Delete";
-    newBtn.onclick = function () {
+    newDeleteBtn.innerHTML = "Delete";
+    newDeleteBtn.onclick = function () {
       var ord = this.id + "";
       var x = testerMap.get(ord)[0];
       var y = testerMap.get(ord)[1];
       var confident = testerMap.get(ord)[2];
-      var change = testerMap.get(ord)[3];
+      var type = testerMap.get(ord)[3];
+      var change = testerMap.get(ord)[4];
+      var numberOfChange = testerMap.get(ord)[5]+1;
       if (change=="FALSE"){
-        pushValue(testerMap, this.id, x, y, confident, "TRUE");
+        pushValue(testerMap, this.id, x, y, confident, type, "DELETE", numberOfChange);
+      } else if(change == "CHANGE"){
+        change += "DELETE";
+        pushValue(testerMap, this.id, x, y, confident, type, change, numberOfChange);
       }
       console.log(testerMap);
       clearCanvas();
@@ -294,18 +315,28 @@
         }
       }
       newAnswerLine.remove();
-      //*********************************************************
     };
+    //*********************************************************
+    //*************delete answers*********************************
+    newChangeBtn.innerHTML = "Change";
+    newChangeBtn.onclick = function(){
+      document.getElementById("confidence_type").style.visibility = "visible";
+      console.log(testerMap);
+    }
+    //*********************************************************
   }
   //***************************************************************************************************************************
   
-  function pushValue(map, ord, x, y, confident, change){
+
+  function pushValue(map, ord, x, y, confident, type, change, numberOfChange){
     var order = ord + "";
     map.set(order, []);
     testerMap.get(order).push(x);
     testerMap.get(order).push(y);
     testerMap.get(order).push(confident);
+    testerMap.get(order).push(type);
     testerMap.get(order).push(change);
+    testerMap.get(order).push(numberOfChange);
   }
 
   function clearCanvas(){

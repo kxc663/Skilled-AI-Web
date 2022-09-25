@@ -8,6 +8,7 @@ body {
 #back{
   width: 150px;
   height: 50px;
+  font-size:20px;
 }
 
 .testPage {
@@ -34,23 +35,26 @@ body {
 #move_Btn{
   width: 300px;
   height: 50px;
+  font-size:20px;
 }
 
 #zoom_In{
   margin-left: 25px;
   width: 300px;
   height: 50px;
-  
+  font-size:20px;
 }
 
 #zoom_Out{
   width: 300px;
   height: 50px;
+  font-size:20px;
 }
 
 #addNew_Btn{
   width: 960px;
   height: 50px;
+  font-size:20px;
 }
 
 .test-img {
@@ -65,7 +69,7 @@ body {
   height: 892px;
 }
 
-#confidence {
+#confidence_type {
   width: 960px;
   height: 120px;
   visibility: hidden;
@@ -79,16 +83,22 @@ body {
 #submit_Btn {
   width: 960px;
   height: 50px;
+  font-size:20px;
 }
 
-#confidence_Btn {
-  margin-left: 430px;
+#types{
+  margin-left: 50px;
+  font-size:20px;
+}
+#confirm_Btn {
+  margin-left: 50px;
   width: 100px;
   height: 50px;
+  font-size:20px;
 }
 
 .slider {
-  margin-left: 330px;
+  margin-left: 50px;
   width: 300px;
   display: inline-block;
 }
@@ -111,9 +121,18 @@ body {
   display: inline-block;
 }
 
-.div_btn{
+.change_btn{
+  width: 70px;
+  height: 40px;
+  margin-top: 10px;
+  float: right;
+  font-size:17px;
+}
+
+.del_Btn{
   width: 60px;
   height: 40px;
   margin-top: 10px;
   float: right;
+  font-size:17px;
 }
