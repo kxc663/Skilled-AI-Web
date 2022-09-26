@@ -107,13 +107,13 @@ body {
   display: inline-block;
 }
 
-#div_ans{
+.div_ans{
   width: 960px;
   height: 40px;
   margin-top: 10px;
 }
 
-#div_text{
+.div_text{
   width: 800px;
   height: 40px;
   background-color: white;
